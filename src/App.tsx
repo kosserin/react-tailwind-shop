@@ -5,6 +5,7 @@ import About from "./components/About";
 import Store from "./components/Store";
 import ItemDetails from "./components/ItemDetails";
 import { OrderProvider } from "./OrderContext";
+import ItemsPreview from "./components/ItemsPreview";
 
 const router = createBrowserRouter([
   {
@@ -22,6 +23,10 @@ const router = createBrowserRouter([
   {
     path: "/prodavnica/detalji/:id",
     element: <ItemDetails />,
+  },
+  {
+    path: "/pregled-artikala",
+    element: <ItemsPreview />,
   },
 ]);
 

@@ -10,6 +10,7 @@ import cart from "../assets/cart.svg";
 import Toast from "./Toast";
 import OrderContext from "../OrderContext";
 import { Item } from "../interfaces/item.interface";
+import { SIZES } from "../constants/sizes.constant";
 
 const Store = () => {
   const location = useLocation();
@@ -120,7 +121,7 @@ const Store = () => {
     setTimeout(() => {
       setShouldShowToast(false);
     }, 2000);
-    addItem(item);
+    addItem({ ...item, size: SIZES[0] });
   };
 
   const navigateToItemsOverview = () => {

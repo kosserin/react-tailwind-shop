@@ -1,7 +1,7 @@
 import { Contact } from "./contact.interface";
-import { Item } from "./item.interface";
+import { OrderItem } from "./order-item.interface";
 
 export interface Order {
-  items: Item[];
+  items: OrderItem[];
   contact: Contact;
 }

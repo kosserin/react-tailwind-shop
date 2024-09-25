@@ -3,13 +3,20 @@ import { Link } from "react-router-dom";
 import bag from "../assets/bag.svg";
 import OrderContext from "../OrderContext";
 import { NAV_LINKS } from "../constants/nav-links.constant";
+import { useNavigate } from 'react-router-dom';
+
 
 const Header = () => {
   const { order, getOrderFromStorage } = useContext(OrderContext);
+  const navigate = useNavigate();
 
   useEffect(() => {
     getOrderFromStorage();
   }, []);
+
+  const navigateToItemsPreview = () => {
+    navigate('/pregled-artikala');
+  }
 
   return (
     <header className="sticky top-0 left-0 right-0 bg-dark pb-4 max-w-screen-2xl flex flex-wrap center-align mx-auto lg:px-24 px-4 lg:pt-16 pt-4 items-center justify-between">
@@ -27,7 +34,7 @@ const Header = () => {
               {link.text}
             </Link>
           ))}
-          <button className="relative">
+          <button onClick={navigateToItemsPreview} className="relative">
             <img src={bag} alt="Korpa" />
             <span className="absolute end-0 right-0 -translate-y-1/2 translate-x-1/4 text-xs font-medium rounded-full bg-black w-6 h-6 leading-none flex justify-center items-center">
               {order.items.length}

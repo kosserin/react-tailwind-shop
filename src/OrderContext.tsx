@@ -4,7 +4,7 @@ import { Order } from "./interfaces/order.interface";
 
 const OrderContext = createContext({
   order: {
-    items: [],
+    items: [] as OrderItem[],
     contact: {
       firstname: "",
       lastname: "",
@@ -15,7 +15,7 @@ const OrderContext = createContext({
     },
   },
   addItem: (item) => {},
-  removeItem: (item) => {},
+  removeItem: (id) => {},
   clearCart: () => {},
   getOrderFromStorage: () => {},
 });
@@ -42,8 +42,8 @@ export const OrderProvider = ({ children }) => {
   };
 
   const removeItem = (id: number) => {
-    const updatedItems = [...order.items];
-    updatedItems.filter((item) => item.id !== id);
+    let updatedItems = [...order.items];
+    updatedItems = updatedItems.filter((item) => item.id !== id);
     const updatedOrder = { ...order, items: updatedItems };
     setOrder(updatedOrder);
     storeOrder(updatedOrder);
