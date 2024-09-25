@@ -2,20 +2,10 @@ import React, { useContext, useEffect } from "react";
 import { Link } from "react-router-dom";
 import bag from "../assets/bag.svg";
 import OrderContext from "../OrderContext";
+import { NAV_LINKS } from "../constants/nav-links.constant";
 
 const Header = () => {
   const { order, getOrderFromStorage } = useContext(OrderContext);
-
-  const navLinks = [
-    {
-      text: "O nama",
-      path: "/o-nama",
-    },
-    {
-      text: "Prodavnica",
-      path: "/prodavnica",
-    },
-  ];
 
   useEffect(() => {
     getOrderFromStorage();
@@ -28,7 +18,7 @@ const Header = () => {
       </Link>
       <nav>
         <ul className="flex gap-4 items-center">
-          {navLinks.map((link, index) => (
+          {NAV_LINKS.map((link, index) => (
             <Link
               to={link.path}
               key={index}
