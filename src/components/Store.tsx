@@ -166,9 +166,9 @@ const Store = () => {
                     </p>
                     <button
                       onClick={(e) => handleAddToCart(e)}
-                      className="border mt-2 py-2 items-center flex text-center justify-center gap-1 hover:bg-white hover:bg-opacity-20"
+                      className="flex gap-2 items-center justify-center mt-2 text-white bg-slate-900 hover:bg-slate-950 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-3 py-2.5 focus:outline-none"
                     >
-                      <img className="size-6" src={cart} alt="Dodaj u korpu" />
+                      <img className="size-5" src={cart} alt="Dodaj u korpu" />
                       <span className="font-medium text-sm">Dodaj u korpu</span>
                     </button>
                   </div>
@@ -182,8 +182,7 @@ const Store = () => {
               Nismo pronasli nista
             </h3>
             <p className="text-slate-300 font-medium">
-              Pokusajte da promenite filtere kako biste pronasli druge
-              artikle.
+              Pokusajte da promenite filtere kako biste pronasli druge artikle.
             </p>
           </div>
         )}

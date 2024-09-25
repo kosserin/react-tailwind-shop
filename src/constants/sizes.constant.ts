@@ -17,8 +17,4 @@ export const SIZES: ItemSize[] = [
     size: "xl",
     text: "XL",
   },
-  {
-    size: "xxl",
-    text: "XXL",
-  },
 ];

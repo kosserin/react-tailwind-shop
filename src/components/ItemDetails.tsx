@@ -56,7 +56,7 @@ const ItemDetails = () => {
                 <p className="text-4xl playfair italic">
                   {item.price.toLocaleString()} rsd
                 </p>
-                <button className="bg-black text-white py-3 px-6 font-medium w-fit">
+                <button className="text-white bg-slate-900 hover:bg-slate-950 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-3 focus:outline-none w-fit">
                   Dodaj u korpu
                 </button>
               </div>
