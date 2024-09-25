@@ -8,7 +8,7 @@ import { BRANDS } from "../constants/brands.constant";
 const Home = () => {
   return (
     <main>
-      <Header></Header>
+      <Header />
       <section className="flex items-center wrap flex-wrap mx-auto w-fit mt-14 px-4 lg:px-14 xl:gap-0 gap-12">
         <div className="left-side z-10">
           <h1 className="uppercase font-bold md:text-8xl text-4xl playfair italic">

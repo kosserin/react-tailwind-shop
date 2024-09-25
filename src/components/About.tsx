@@ -20,7 +20,7 @@ const CONTACTS = [
 const About = () => {
   return (
     <main>
-      <Header></Header>
+      <Header />
       <section className="flex max-w-screen-xl align-start justify-start flex-col mx-auto mt-14 px-4 lg:px-14">
         <div className="flex flex-col xl:gap-0 gap-12">
           <div className="left-side z-10">

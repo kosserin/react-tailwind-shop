@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import Header from "./Header";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import Filters from "./Filters";
@@ -7,6 +7,9 @@ import { ITEMS } from "../constants/items.constant";
 import { TYPES } from "../constants/types.constant";
 import { BRANDS } from "../constants/brands.constant";
 import cart from "../assets/cart.svg";
+import Toast from "./Toast";
+import OrderContext from "../OrderContext";
+import { Item } from "../interfaces/item.interface";
 
 const Store = () => {
   const location = useLocation();
@@ -17,6 +20,8 @@ const Store = () => {
   const [storeItems, setStoreItems] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [displayCount, setDisplayCount] = useState(20);
+  const [shouldShowToast, setShouldShowToast] = useState(false);
+  const { addItem } = useContext(OrderContext);
 
   useEffect(() => {
     const params = new URLSearchParams(location.search);
@@ -105,9 +110,21 @@ const Store = () => {
     navigate(`${location.pathname}?${params}`, { replace: true });
   };
 
-  const handleAddToCart = (e: React.MouseEvent<HTMLButtonElement>) => {
+  const handleAddToCart = (
+    e: React.MouseEvent<HTMLButtonElement>,
+    item: Item
+  ) => {
     e.stopPropagation();
     e.preventDefault();
+    setShouldShowToast(true);
+    setTimeout(() => {
+      setShouldShowToast(false);
+    }, 2000);
+    addItem(item);
+  };
+
+  const navigateToItemsOverview = () => {
+    navigate("/pregled-artikala");
   };
 
   return (
@@ -165,7 +182,8 @@ const Store = () => {
                       {item.price.toLocaleString()} rsd
                     </p>
                     <button
-                      onClick={(e) => handleAddToCart(e)}
+                      disabled={shouldShowToast}
+                      onClick={(e) => handleAddToCart(e, item)}
                       className="flex gap-2 items-center justify-center mt-2 text-white bg-slate-900 hover:bg-slate-950 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-3 py-2.5 focus:outline-none"
                     >
                       <img className="size-5" src={cart} alt="Dodaj u korpu" />
@@ -182,7 +200,7 @@ const Store = () => {
               Nismo pronasli nista
             </h3>
             <p className="text-slate-300 font-medium">
-              Pokusajte da promenite filtere kako biste pronasli druge artikle.
+              Pokušaj da promeniš filtere kako bi pronašao druge artikle
             </p>
           </div>
         )}
@@ -195,6 +213,13 @@ const Store = () => {
           </button>
         )}
       </section>
+      {shouldShowToast && (
+        <Toast
+          message={"Dodato u korpu"}
+          buttonText={"Vidi"}
+          buttonHandler={navigateToItemsOverview}
+        />
+      )}
     </main>
   );
 };

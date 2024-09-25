@@ -1,11 +1,12 @@
 import React, { createContext, useState } from "react";
 import { OrderItem } from "./interfaces/order-item.interface";
+import { Order } from "./interfaces/order.interface";
 
 const OrderContext = createContext({
   order: {
     items: [],
     contact: {
-      firstame: "",
+      firstname: "",
       lastname: "",
       phone: "",
       email: "",
@@ -16,13 +17,14 @@ const OrderContext = createContext({
   addItem: (item) => {},
   removeItem: (item) => {},
   clearCart: () => {},
+  getOrderFromStorage: () => {},
 });
 
 export const OrderProvider = ({ children }) => {
-  const [order, setOrder] = useState({
+  const [order, setOrder] = useState<Order>({
     items: [],
     contact: {
-      firstame: "",
+      firstname: "",
       lastname: "",
       phone: "",
       email: "",
@@ -34,22 +36,43 @@ export const OrderProvider = ({ children }) => {
   const addItem = (item: OrderItem) => {
     const updatedItems = [...order.items];
     updatedItems.push(item);
-    setOrder({ ...order, items: updatedItems });
+    const updatedOrder = { ...order, items: updatedItems };
+    setOrder(updatedOrder);
+    storeOrder(updatedOrder);
   };
 
   const removeItem = (id: number) => {
     const updatedItems = [...order.items];
     updatedItems.filter((item) => item.id !== id);
-    setOrder({ ...order, items: updatedItems });
+    const updatedOrder = { ...order, items: updatedItems };
+    setOrder(updatedOrder);
+    storeOrder(updatedOrder);
   };
 
   const clearCart = () => {
     setOrder({ ...order, items: [] });
   };
 
+  const storeOrder = (order: Order) => {
+    localStorage.setItem("order", JSON.stringify(order));
+  };
+
+  const getOrderFromStorage = () => {
+    const order = JSON.parse(localStorage.getItem("order"));
+    if (order) {
+      setOrder(order);
+    }
+  };
+
   return (
     <OrderContext.Provider
-      value={{ order: order, addItem, removeItem, clearCart }}
+      value={{
+        order: order,
+        addItem,
+        removeItem,
+        clearCart,
+        getOrderFromStorage,
+      }}
     >
       {children}
     </OrderContext.Provider>
