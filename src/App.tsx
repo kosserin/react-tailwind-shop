@@ -4,6 +4,7 @@ import Home from "./components/Home";
 import About from "./components/About";
 import Store from "./components/Store";
 import ItemDetails from "./components/ItemDetails";
+import { OrderProvider } from "./OrderContext";
 
 const router = createBrowserRouter([
   {
@@ -25,8 +26,10 @@ const router = createBrowserRouter([
 ]);
 
 const App = () => (
-  <div className="bg-dark min-h-screen">
-    <RouterProvider router={router} />
-  </div>
+  <OrderProvider>
+    <div className="bg-dark min-h-screen">
+      <RouterProvider router={router} />
+    </div>
+  </OrderProvider>
 );
 export default App;
